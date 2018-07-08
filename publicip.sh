@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 #script to send my public ip on mail if changed
 #author=shravandwarka
-#version=0.2
+#version=0.3
 
 IPFILE=<Enter file path>
 
