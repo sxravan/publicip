@@ -1,12 +1,12 @@
-#!/bin/bash
+#!/usr/bin/env bash
 #script to send my public ip on mail if changed
 #author=shravandwarka
 #version=0.2
 
-IPFILE=ip
+IPFILE=<Enter file path>
 
 if [ ! -f "$IPFILE" ]; then
-	curl -o ip ipinfo.io/ip
+	curl -o "$IPFILE" ipinfo.io/ip
 fi
 
 CIP=$(cat "$IPFILE")
@@ -17,11 +17,11 @@ COU=""
 while [ -z "$NIP" ]
 do
 	NIP="$(curl ipinfo.io/ip)"
-	REG="$(curl ipinfo.io/region)"
-	COU="$(curl ipinfo.io/country)"
 done
 
 if [ "$NIP" != "$CIP" ]; then
+	REG="$(curl ipinfo.io/region)"
+	COU="$(curl ipinfo.io/country)"
 	ipadd=$(cat << TEMPLATE
 	<html>
 		<header>
@@ -61,6 +61,6 @@ if [ "$NIP" != "$CIP" ]; then
 	</html>
 TEMPLATE
 )	
-	/usr/bin/printf "%b" "$ipadd" | /usr/bin/mail -a "Content-Type:text/html;" -a "Mime-Version: 1.0;" -s "Public IP Address" <Enter your email here>
-	curl -o ip ipinfo.io/ip
+	/usr/bin/printf "%b" "$ipadd" | /usr/bin/mail -a "Content-Type:text/html;" -a "Mime-Version: 1.0;" -s "Public IP Address" <enter email here>
+	curl -o "$IPFILE" ipinfo.io/ip
 fi
