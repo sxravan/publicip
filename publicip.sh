@@ -3,7 +3,11 @@
 #author=shravandwarka
 #version=0.3
 
-IPFILE=<Enter file path>
+set -e
+set -o nounset
+
+IPFILE=$HOME/ip
+EMAIL=""
 
 if [ ! -f "$IPFILE" ]; then
 	curl -o "$IPFILE" ipinfo.io/ip
@@ -61,6 +65,6 @@ if [ "$NIP" != "$CIP" ]; then
 	</html>
 TEMPLATE
 )	
-	/usr/bin/printf "%b" "$ipadd" | /usr/bin/mail -a "Content-Type:text/html;" -a "Mime-Version: 1.0;" -s "Public IP Address" <enter email here>
+	/usr/bin/printf "%b" "$ipadd" | /usr/bin/mail -a "Content-Type:text/html;" -a "Mime-Version: 1.0;" -s "Public IP Address" $EMAIL
 	curl -o "$IPFILE" ipinfo.io/ip
 fi
