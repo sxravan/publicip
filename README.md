@@ -1,10 +1,20 @@
-# publicip
+# Read me: Public IP Notifier
 
-1. Create a .txt file `ip.txt` and copy its path.
-2. Open the script using your favorite text editor.
-3. Paste the path in the script. (Assign it to the IPFILE variable). `IPFILE = ~/ip.txt`
-4. Enter your e-mail address in the command found below the template.
-5. Install `mailutils`. `sudo apt-get install mailutils`
-6. Configure postfix `vim /etc/postfix/main.cf`.
-7. Use a proper relay host.
-8. Update your cron as you wish.
+This script was created for my personal use. I had an external hard disk connected to my raspberry pi at home and wanted to access my data anywhere I was. I did not want to spend on a VPS to set up a VPN server.
+
+Feel free to create any issue / feature request.
+
+## Instructions
+
+1.	Edit the publicip.sh file and set your e-mail address in the EMAIL variable.
+2.	Install mailutils and postfix packages.
+	> Normally postfix gets installed when installing mailutils.
+3.	Configure postfix:
+	1.	> sudo vi /etc/postfix/main.cf
+	2.	Set inet_interface from all to either loopback-only or localhost.
+		> inet_interfaces = localhost
+	3.	Write and quit.
+	4.	Restart the postfix service.
+		> systemctl restart postfix
+
+##### Regards!
