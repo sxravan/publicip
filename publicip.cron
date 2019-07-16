@@ -1,0 +1,1 @@
+*/1 * * * * /path/to/executable/script && ./script.sh
